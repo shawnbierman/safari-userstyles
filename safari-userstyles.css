@@ -1,0 +1,46 @@
+/* old.reddit.com — slim sidebar
+   Applied via Safari → Settings → Advanced → Style sheet
+   Scope: body.loggedin/loggedout + .side is reddit-specific. */
+
+/* 1. Kill the noise — sidecontentboxes (recently viewed, karma), account
+      activity, gold/premium banners, ads, info bars. */
+body.loggedin  .side .sidecontentbox,
+body.loggedout .side .sidecontentbox,
+body.loggedin  .side > .spacer:has(.sidecontentbox),
+body.loggedout .side > .spacer:has(.sidecontentbox),
+body.loggedin  .side .account-activity-box,
+body.loggedin  .side .gold-wrap,
+body.loggedin  .side .premium-banner-outer,
+body.loggedin  .side .ad-container,
+body.loggedin  .side .infobar { display: none !important; }
+
+/* 2. On aggregate pages (front / all / popular / multis carry
+      .with-listing-chooser; subreddit pages do not), hide submit +
+      create-subreddit too. Subreddit pages keep them. */
+body.with-listing-chooser .side > .spacer:has(.morelink),
+body.with-listing-chooser .side > .spacer:has(.create) { display: none !important; }
+
+/* 3. Shrink everything that's left to ~60% via zoom (shrinks both render
+      and layout, unlike transform: scale). */
+body.loggedin  .side,
+body.loggedout .side { zoom: 0.6; }
+
+/* 4. Widen posts — only enough margin to clear the zoomed sidebar. */
+body.loggedin  .content,
+body.loggedout .content { margin-right: 190px !important; }
+
+/* 5. Hide promoted / sponsored posts in feeds. */
+body.loggedin  .thing.promoted,
+body.loggedin  .thing.promotedlink,
+body.loggedout .thing.promoted,
+body.loggedout .thing.promotedlink,
+body.loggedin  .organic-listing,
+body.loggedout .organic-listing { display: none !important; }
+
+/* 6. Hide the "GET NEW REDDIT" / redesign opt-in nag in the header. */
+body.loggedin  #redesign-beta-optin-btn,
+body.loggedout #redesign-beta-optin-btn,
+body.loggedin  .redesign-beta-optin,
+body.loggedout .redesign-beta-optin,
+body.loggedin  a[href*="redesign"][href*="optin"],
+body.loggedout a[href*="redesign"][href*="optin"] { display: none !important; }
